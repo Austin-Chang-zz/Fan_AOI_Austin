@@ -137,3 +137,83 @@ Here’s a step-by-step breakdown:
 This setup prepares the data for efficient and scalable training. Images are preprocessed dynamically, reducing memory usage, and ensuring the training loop can iterate over batches without loading all images at once.
 </details>
 
+<details>
+  <summary>3. The flow_from_directory function labels images based on the folder names</summary>
+  The `flow_from_directory` function labels images **based on the folder names** in which the images are stored. Here's how it works in your scenario:
+
+---
+
+### **How `flow_from_directory` Labels Images**
+1. **Folder Structure and Labels**:
+   - The directory passed to `flow_from_directory` (e.g., `base_dir`) must have subdirectories, where each subdirectory represents a class.
+   - For example:
+     ```
+     base_dir/
+     ├── GO/    # Folder for class "GO"
+     │   ├── image1.jpg
+     │   ├── image2.jpg
+     │   └── ...
+     └── NG/    # Folder for class "NG"
+         ├── image1.jpg
+         ├── image2.jpg
+         └── ...
+     ```
+
+   - In this structure:
+     - All images inside the `GO` folder are automatically labeled as `1` (class 1).
+     - All images inside the `NG` folder are automatically labeled as `0` (class 0).
+     - This labeling is based entirely on the folder names.
+
+2. **Mixing Images**:
+   - `flow_from_directory` does **not mix images across folders**.
+   - Each image is labeled according to the folder it resides in, not based on its content or features.
+
+3. **How Labels Are Decided**:
+   - **The folder structure determines the labels**.
+   - The function assigns labels in alphabetical order of the folder names:
+     - If `GO` comes alphabetically after `NG`, then:
+       - `NG` is labeled as `0`.
+       - `GO` is labeled as `1`.
+
+---
+
+### **Your Question Answered**
+1. **Does `flow_from_directory` read all images in folder `60` as `NG` and `100` as `GO`?**
+   - If `60` and `100` are folder names, it depends on their placement in the directory and naming convention:
+     - If `base_dir` has `60` and `100` as folder names:
+       ```
+       base_dir/
+       ├── 60/   # Class 0
+       └── 100/  # Class 1
+       ```
+       Then:
+       - Images in folder `60` are labeled as `0` (NG).
+       - Images in folder `100` are labeled as `1` (GO).
+
+2. **Who decides whether an image is `GO` or `NG`?**
+   - **You decide** by organizing the images into their respective folders (`GO` or `NG`) before running `flow_from_directory`.
+
+3. **Can `flow_from_directory` classify based on image features?**
+   - No, `flow_from_directory` does not analyze image features. It only assigns labels based on the folder structure.
+   - The model you train using these labeled images will later learn the features that distinguish `GO` from `NG`.
+
+---
+
+### **What If You Need Dynamic Labeling Based on Features?**
+If you want to label images based on their features (e.g., using metadata or a custom algorithm):
+1. Use a script to process images and assign labels dynamically.
+2. Create a custom data generator instead of relying on `flow_from_directory`.
+3. Example:
+   ```python
+   def custom_generator(file_paths, labels, batch_size):
+       # Logic to load images and labels dynamically
+       pass
+   ```
+
+---
+
+### **Summary**
+- `flow_from_directory` labels images based on **folder names** (e.g., `GO` and `NG`).
+- **You decide the criteria** for `GO` or `NG` by placing images in the respective folders.
+- It does **not analyze image features**; the folder structure alone dictates the labels.
+</details>
