@@ -347,3 +347,106 @@ Yes, the **labeled images from `train_generator` are used to train the model**. 
 - The model learns patterns (features) that distinguish the two classes during training.
 - The trained model is saved for future use.
 </details>
+
+---
+<details>
+  <summary>5. 32 filters (or kernels), each with size 3×3</summary>
+  The 32 filters (or kernels) in a convolutional layer are arrays of trainable parameters, initialized randomly and updated during training. Let's break this down:
+
+---
+
+### **1. What Are Filters in a CNN?**
+- **Filters/Kernels**:
+  - A filter is a small matrix (e.g., \(3 \times 3\)) that slides over the input image (convolution operation).
+  - It extracts specific features like edges, textures, or patterns from the image.
+  - In your case, there are **32 filters**, each with dimensions \(3 \times 3\).
+
+- **How They Look**:
+  - Initially, filters are **randomly initialized**.
+  - During training, the values in these filters are updated via **backpropagation** to minimize the loss function.
+  - After training, the filters might represent specific patterns (e.g., edges, corners, or more abstract features in deeper layers).
+
+---
+
+### **2. How Are Filters Produced?**
+Filters are learned automatically during the training process:
+
+1. **Initialization**:
+   - Filters are initialized with small random values (e.g., using techniques like Xavier or He initialization).
+
+2. **Convolution Operation**:
+   - Each filter slides across the input image (or feature map) and performs element-wise multiplication followed by summation (dot product).
+   - This operation produces a feature map for each filter, highlighting areas of the image where the filter's pattern matches.
+
+3. **Loss and Backpropagation**:
+   - The network calculates the **loss** (difference between predictions and actual labels).
+   - Through **backpropagation**, the gradients of the loss with respect to the filter values are computed.
+   - The filter values are updated using these gradients to make the predictions more accurate.
+
+---
+
+### **3. What Do the Filters Learn?**
+The criteria for what a filter "looks like" or what it "learns" are not predefined but emerge naturally during training:
+
+1. **Shallow Layers**:
+   - Filters in the first convolutional layer learn **basic features** like:
+     - Vertical edges
+     - Horizontal edges
+     - Diagonal lines
+     - Color gradients
+
+2. **Deeper Layers**:
+   - Filters in deeper layers learn **abstract features** like:
+     - Shapes
+     - Textures
+     - Patterns
+     - Object parts
+
+3. **How They Look Post-Training**:
+   - Filters often resemble patterns relevant to the task. For example, in a defect inspection task:
+     - Some filters might focus on detecting circular shapes (labels).
+     - Others might focus on irregularities (defects).
+
+---
+
+### **4. How to Visualize Filters?**
+Filters can be visualized to understand what they’ve learned:
+- After training, you can extract and visualize filter weights using libraries like TensorFlow or Keras.
+
+#### Example Code to Visualize Filters:
+```python
+# Extract the weights of the first convolutional layer
+filters, biases = model.layers[0].get_weights()
+
+# Normalize filter values for visualization
+filters = (filters - filters.min()) / (filters.max() - filters.min())
+
+# Plot filters
+import matplotlib.pyplot as plt
+n_filters = filters.shape[-1]  # Number of filters
+for i in range(n_filters):
+    f = filters[:, :, :, i]  # Extract each filter
+    plt.subplot(4, 8, i+1)   # Adjust rows and columns as needed
+    plt.imshow(f[:, :, 0], cmap='gray')  # Visualize filter as grayscale
+    plt.axis('off')
+plt.show()
+```
+
+---
+
+### **5. Are Filters Predefined or Learned?**
+- Filters are **not predefined**.
+- They are **learned** during training based on the task at hand and the input data.
+- The criteria for what a filter represents emerge from:
+  - The dataset (e.g., images of "GO" and "NG").
+  - The loss function (e.g., binary cross-entropy in your case).
+
+---
+
+### **Summary**
+- The 32 filters are \(3 \times 3\) matrices of numbers (initially random), updated during training.
+- These filters are learned to capture patterns relevant to the task:
+  - Shallow filters detect simple edges or textures.
+  - Deeper filters identify complex patterns or shapes.
+- The learning process is automatic and driven by the dataset and optimization process (backpropagation). Visualization can help understand the features they detect.
+</details>
