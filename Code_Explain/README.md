@@ -1,4 +1,4 @@
-# CNN Code Explanation
+# FanAOI Background Theory
 
 <details>
   <summary>1. what is cross entropy meaning in CNN</summary>  
