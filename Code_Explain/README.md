@@ -1,4 +1,4 @@
-# Code Explanation
+# CNN　Code Explanation
 
 <details>
   <summary>1. what is cross entropy meaning in CNN</summary>  
