@@ -812,3 +812,48 @@ Labels typically need to be associated with the input dataset in supervised lear
 
 The use of labels is context-dependent, but they are foundational for achieving high prediction accuracy in CNNs, especially for supervised tasks.
 </details>
+<details>
+  <summary>11. Machine Learning Categories</summary>
+
+  ### Machine Learning Categories: Supervised, Unsupervised, and Reinforcement Learning
+
+Machine learning can be broadly categorized into three types: **Supervised Learning**, **Unsupervised Learning**, and **Reinforcement Learning**. Here's a comparison chart describing these approaches:
+
+---
+
+| **Learning Type**     | **Definition**                                                                 | **Key Features**                                                      | **Common Applications**                               |
+|------------------------|-------------------------------------------------------------------------------|------------------------------------------------------------------------|------------------------------------------------------|
+| **Supervised Learning** | Uses labeled data to train the model, where inputs are mapped to known outputs. | - Requires a large amount of labeled data.<br>- Provides clear guidance during training. | - Image classification<br>- Speech recognition<br>- Credit scoring |
+| **Unsupervised Learning** | Uses unlabeled data, where the model identifies patterns or structures within the data. | - Does not require labeled data.<br>- Suitable for exploratory data analysis. | - Customer segmentation<br>- Dimensionality reduction<br>- Anomaly detection |
+| **Reinforcement Learning** | The model learns to make decisions through interaction with an environment, based on rewards and penalties. | - Does not require extensive labeled data.<br>- Relies on a well-designed reward system. | - Robotics<br>- Game AI<br>- Autonomous driving |
+
+---
+
+### Visual Resources
+
+#### Charts:
+1. **Comparison of Supervised, Unsupervised, and Reinforcement Learning**  
+   - **[Supervised and Unsupervised Learning Infographic](https://medium.com/marketingdatascience/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E6%BC%94%E7%AE%97%E6%B3%95-%E7%9B%A3%E7%9D%A3%E8%88%87%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92-e9dbeee94a30)**  
+
+2. **Supervised Learning Workflow**  
+   - **[Supervised Learning Flow and Framework](https://kknews.cc/code/94lkkq5.html)**  
+
+3. **Reinforcement Learning Diagram**  
+   - **[Reinforcement Learning Overview](https://www.youtube.com/watch?v=XWukX-ayIrs)**  
+
+---
+
+### Videos for Deeper Understanding
+1. **Supervised vs. Unsupervised Learning**  
+   - [Watch Here](https://www.youtube.com/watch?v=Ui30XJEbi0Y)
+
+2. **Introduction to Reinforcement Learning**  
+   - [Watch Here](https://www.youtube.com/watch?v=XWukX-ayIrs)
+
+3. **Unsupervised Learning Explained**  
+   - [Watch Here](https://www.youtube.com/watch?v=3fjVJuzWBPw)
+
+---
+
+These resources will help you visually and conceptually differentiate between these machine learning types for your presentation or understanding. Let me know if you need any further clarification or customized charts!
+</details>
