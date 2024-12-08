@@ -1,3 +1,5 @@
+# Code Explanation
+
 <details>
   <summary>1. what is cross entropy meaning in CNN</summary>  
 Cross-entropy is a loss function commonly used in **Convolutional Neural Networks (CNNs)**, particularly for classification tasks. It measures the difference between the predicted probability distribution and the true label distribution. Cross-entropy quantifies how well the predicted probability distribution matches the actual labels.
@@ -348,7 +350,6 @@ Yes, the **labeled images from `train_generator` are used to train the model**. 
 - The trained model is saved for future use.
 </details>
 
----
 <details>
   <summary>5. 32 filters (or kernels), each with size 3×3</summary>
   The 32 filters (or kernels) in a convolutional layer are arrays of trainable parameters, initialized randomly and updated during training. Let's break this down:
