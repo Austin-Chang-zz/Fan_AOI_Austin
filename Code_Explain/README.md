@@ -857,3 +857,86 @@ Machine learning can be broadly categorized into three types: **Supervised Learn
 
 These resources will help you visually and conceptually differentiate between these machine learning types for your presentation or understanding. Let me know if you need any further clarification or customized charts!
 </details>
+<details>
+  <summary>12. When Does Backpropagation Happen?</summary>
+
+  In your neural network code, **backpropagation** (the process of adjusting the model's weights to minimize the loss) is automatically performed during the **training phase**. Here’s how and when it happens:
+
+---
+
+### **When Does Backpropagation Happen?**
+Backpropagation occurs during the execution of the `model.fit()` method. Specifically:
+1. **Forward Pass**:
+   - For each batch of training data, the input is passed through the layers of the model (from the first layer to the last layer) to compute the output predictions.
+   - The predicted values are compared with the true labels to compute the **loss** using the specified loss function (`binary_crossentropy` in this case).
+
+2. **Backward Pass (Backpropagation)**:
+   - The model computes the gradients of the loss with respect to each trainable parameter (weights and biases) using the chain rule of calculus.
+   - These gradients indicate the direction and magnitude by which the parameters should be adjusted to minimize the loss.
+
+3. **Parameter Update**:
+   - The optimizer (`adam` in this case) applies the computed gradients to update the model's parameters.
+   - This step adjusts the weights to reduce the loss for the next iteration.
+
+4. **Repeat**:
+   - This process repeats for each batch in an epoch, and for all specified epochs.
+
+---
+
+### **How Does Backpropagation Work in Your Code?**
+
+1. **During `model.fit()`**:
+   - The dataset is divided into batches based on `batch_size` (32 in your code).
+   - For each batch:
+     - The forward pass computes the predictions and the loss.
+     - The backward pass computes gradients for all layers using the chain rule.
+     - The optimizer updates the weights of the layers in the reverse order (from the last layer to the first layer).
+
+2. **Inside Your Model Layers**:
+   - The layers are organized in sequence:
+     - **Conv2D** and **Dense layers** have trainable weights (filters, kernel weights, and biases).
+     - During backpropagation, these weights are adjusted to minimize the loss.
+   - The `sigmoid` activation in the output layer ensures that the output is in the range `[0, 1]`, suitable for binary classification.
+   - The `relu` activations in hidden layers introduce non-linearity, which helps the model learn complex patterns.
+
+---
+
+### **Key Steps in Backpropagation Execution**:
+1. **Compute Loss**: 
+   - The difference between predicted outputs and actual labels is computed using `binary_crossentropy`.
+   
+2. **Compute Gradients**:
+   - Gradients of the loss with respect to each parameter in the model are computed using TensorFlow's automatic differentiation.
+   
+3. **Update Parameters**:
+   - The `adam` optimizer applies these gradients to update parameters.
+
+---
+
+### **Code Snippet Explanation**:
+```python
+# Forward pass: From input to output through the layers
+output = model(input_data)
+
+# Loss calculation: Compares output to true labels
+loss = binary_crossentropy(output, true_labels)
+
+# Backward pass: Gradients are calculated for each layer
+gradients = compute_gradients(loss, model.weights)
+
+# Parameter update: Gradients are used to adjust weights
+model.weights = optimizer.apply_gradients(gradients)
+```
+
+This process is handled internally by TensorFlow during the call to `model.fit()`.
+
+---
+
+### **Summary**:
+1. Backpropagation occurs **within each epoch** during `model.fit()`.
+2. For every batch:
+   - A forward pass computes predictions and the loss.
+   - A backward pass computes gradients.
+   - The optimizer adjusts the weights to minimize the loss.
+3. This process is repeated for all batches in the dataset and for all epochs, gradually improving the model's performance.
+</details>
