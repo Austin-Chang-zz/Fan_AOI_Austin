@@ -1020,6 +1020,7 @@ This manual process replicates what happens inside `model.fit()`. If you are usi
 </details>
 <details>
   <summary>14. The domain knowledge of self-defined filter is strong</summary>
+  
   Yes, defining or initializing filters that are suitable for your target task can be more effective than using randomly initialized filters, particularly if you have prior knowledge about the patterns, features, or characteristics of the data. This approach can lead to faster convergence during training, improved performance, or better interpretability. However, this technique is rarely applied universally because:
 
 1. **Generalization of Random Initialization**: Randomly initialized filters, combined with sufficient data and effective training, tend to converge to optimal weights for the task.
