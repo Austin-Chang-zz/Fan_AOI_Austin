@@ -940,3 +940,81 @@ This process is handled internally by TensorFlow during the call to `model.fit()
    - The optimizer adjusts the weights to minimize the loss.
 3. This process is repeated for all batches in the dataset and for all epochs, gradually improving the model's performance.
 </details>
+
+<details>
+  <summary>13. input_data refers to the actual batch of training data</summary>
+
+  The error occurs because the variable `input_data` is not defined. In a neural network training setup, `input_data` refers to the actual batch of training data that is fed into the model during the forward pass. This process is automated in TensorFlow when using `model.fit()`.
+
+Here’s a corrected explanation and code snippet to clarify how the forward pass, loss calculation, and backpropagation work manually in TensorFlow. 
+
+---
+
+### Corrected Code:
+```python
+import tensorflow as tf
+
+# Example input data (batch of size 2, 80x80x3 images)
+input_data = tf.random.uniform((2, 80, 80, 3))  # Replace this with actual data
+true_labels = tf.constant([0, 1], dtype=tf.float32)  # Replace with actual labels
+
+# Forward pass: Compute model predictions
+output = model(input_data)
+
+# Loss calculation: Compares predictions to true labels
+loss_fn = tf.keras.losses.BinaryCrossentropy()
+loss = loss_fn(true_labels, output)
+
+# Backward pass: Compute gradients
+with tf.GradientTape() as tape:
+    predictions = model(input_data)
+    loss = loss_fn(true_labels, predictions)
+
+# Compute gradients with respect to model weights
+gradients = tape.gradient(loss, model.trainable_weights)
+
+# Update model weights using the optimizer
+optimizer = tf.keras.optimizers.Adam()
+optimizer.apply_gradients(zip(gradients, model.trainable_weights))
+
+# Print results for demonstration
+print(f"Predictions: {predictions.numpy()}")
+print(f"Loss: {loss.numpy()}")
+```
+
+---
+
+### Key Changes:
+1. **Defined `input_data`**:
+   - Used random tensors (`tf.random.uniform`) to simulate input images.
+   - Replace this with actual training data during real usage.
+
+2. **Added `true_labels`**:
+   - Used a constant tensor to represent true labels (binary: 0 or 1).
+
+3. **Introduced `GradientTape`**:
+   - `tf.GradientTape()` is used to compute the gradients manually for the backward pass.
+   - It tracks computations during the forward pass and calculates gradients with respect to trainable weights.
+
+4. **Applied Gradients**:
+   - The computed gradients are applied to the model's weights using an optimizer (`Adam` in this case).
+
+---
+
+### Explanation of Workflow:
+1. **Forward Pass**:
+   - `model(input_data)` calculates predictions for the input data.
+
+2. **Loss Calculation**:
+   - The `BinaryCrossentropy` loss compares predictions to true labels.
+
+3. **Gradient Calculation**:
+   - `tape.gradient(loss, model.trainable_weights)` calculates the gradients of the loss with respect to the model's parameters.
+
+4. **Weight Update**:
+   - The optimizer updates the model's weights based on the computed gradients.
+
+---
+
+This manual process replicates what happens inside `model.fit()`. If you are using `model.fit()`, TensorFlow handles all these steps automatically. Let me know if you have more questions!
+</details>
