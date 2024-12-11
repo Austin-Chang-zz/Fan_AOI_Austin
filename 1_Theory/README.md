@@ -1166,3 +1166,85 @@ For a 10-class classification task (e.g., digits), the final dense layer might l
 ### **In Summary**
 Dense layers, placed at the end of CNN stages, serve to interpret the features extracted by the convolutional layers and produce a prediction. They are critical for tasks that require the combination of local feature maps into global predictions, such as classification or regression tasks.
 </details>
+
+<details>
+  <summary>16. how each epoch progresses through the layers:</summary>
+
+  The specified compile parameters (`optimizer=adam`, `loss=binary_crossentropy`, `metrics=accuracy`) apply to the **training process** and not directly to specific layers. Here's how these parameters are used in each epoch:
+
+### 1. **Loss Function (`binary_crossentropy`)**:
+   - The **loss function** measures the difference between the predicted output (from the last layer: `Dense (1, Sigmoid)`) and the true labels.
+   - It is computed **only at the output layer** (after the forward pass is completed for an epoch).
+   - The computed loss guides how much adjustment is needed for the weights of all layers during backpropagation.
+
+### 2. **Optimizer (`adam`)**:
+   - The optimizer adjusts the weights of **all trainable layers** (Conv2D, Dense, etc.) to minimize the loss.
+   - It uses the loss gradient computed during backpropagation to update the weights of:
+     - **Conv2D (32 filters)**.
+     - **Conv2D (64 filters)**.
+     - **Dense (128, ReLU)**.
+     - **Dense (1, Sigmoid)**.
+   - The optimizer does not "skip" any trainable layer; every layer with parameters (weights and biases) is updated.
+
+### 3. **Metrics (`accuracy`)**:
+   - The **accuracy metric** evaluates the model's performance by comparing the predicted outputs from the **output layer** (`Dense (1, Sigmoid)`) with the true labels.
+   - It is calculated after the forward pass (no impact on weight updates).
+
+### Summary of Where Parameters Are Applied:
+- **Forward Pass**:
+  - Input goes through all layers.
+  - Prediction is made at the **output layer** (`Dense (1, Sigmoid)`).
+
+- **Loss Calculation**:
+  - Performed at the **output layer** using `binary_crossentropy`.
+
+- **Backward Pass**:
+  - Gradients flow back through all layers (starting from the output layer to the first layer).
+  - The **adam optimizer** updates the weights of all trainable layers.
+
+- **Metrics Calculation**:
+  - Performed at the **output layer**, comparing predictions with actual labels. 
+
+Each epoch applies these parameters across the full network to ensure all layers are trained and evaluated properly.
+</details>
+
+<details>
+  <summary>17. at what layers will use compile parameters in each epoch?</summary>
+
+  The specified compile parameters (`optimizer=adam`, `loss=binary_crossentropy`, `metrics=accuracy`) apply to the **training process** and not directly to specific layers. Here's how these parameters are used in each epoch:
+
+### 1. **Loss Function (`binary_crossentropy`)**:
+   - The **loss function** measures the difference between the predicted output (from the last layer: `Dense (1, Sigmoid)`) and the true labels.
+   - It is computed **only at the output layer** (after the forward pass is completed for an epoch).
+   - The computed loss guides how much adjustment is needed for the weights of all layers during backpropagation.
+
+### 2. **Optimizer (`adam`)**:
+   - The optimizer adjusts the weights of **all trainable layers** (Conv2D, Dense, etc.) to minimize the loss.
+   - It uses the loss gradient computed during backpropagation to update the weights of:
+     - **Conv2D (32 filters)**.
+     - **Conv2D (64 filters)**.
+     - **Dense (128, ReLU)**.
+     - **Dense (1, Sigmoid)**.
+   - The optimizer does not "skip" any trainable layer; every layer with parameters (weights and biases) is updated.
+
+### 3. **Metrics (`accuracy`)**:
+   - The **accuracy metric** evaluates the model's performance by comparing the predicted outputs from the **output layer** (`Dense (1, Sigmoid)`) with the true labels.
+   - It is calculated after the forward pass (no impact on weight updates).
+
+### Summary of Where Parameters Are Applied:
+- **Forward Pass**:
+  - Input goes through all layers.
+  - Prediction is made at the **output layer** (`Dense (1, Sigmoid)`).
+
+- **Loss Calculation**:
+  - Performed at the **output layer** using `binary_crossentropy`.
+
+- **Backward Pass**:
+  - Gradients flow back through all layers (starting from the output layer to the first layer).
+  - The **adam optimizer** updates the weights of all trainable layers.
+
+- **Metrics Calculation**:
+  - Performed at the **output layer**, comparing predictions with actual labels. 
+
+Each epoch applies these parameters across the full network to ensure all layers are trained and evaluated properly.
+</details>
