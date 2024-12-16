@@ -52,7 +52,7 @@ This value would decrease as the model improves its predictions.
 
    
 <details>
-  <summary>2. Code explanation-1</summary> 
+  <summary>2. ImageDataGenerator</summary> 
   This code is a part of a machine learning pipeline for preparing and loading image data for training a Convolutional Neural Network (CNN). Here’s a detailed breakdown:
 
 ---
