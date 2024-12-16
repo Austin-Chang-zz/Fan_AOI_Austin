@@ -140,7 +140,7 @@ This setup prepares the data for efficient and scalable training. Images are pre
 </details>
 
 <details>
-  <summary>3. The flow_from_directory function labels images based on the folder names</summary>
+  <summary>3. The flow_from_directory function labels images based on the folder names*****</summary>
   The `flow_from_directory` function labels images **based on the folder names** in which the images are stored. Here's how it works in your scenario:
 
 ---
@@ -1420,7 +1420,7 @@ Conv2D(32, (3, 3), activation='relu', kernel_initializer=GlorotNormal())
 Let me know if you'd like further clarification or examples!
 </details>
 <details>
-  <summary>20. How Are Filters Initialized Initially?</summary>
+  <summary>20. How Are Filters Initialized Initially?*****</summary>
   
     The **32 and 64 filters** in your convolutional layers are **initialized randomly** when the model is created, but the initialization process follows certain statistical principles or predefined methods to ensure efficient training.
 
