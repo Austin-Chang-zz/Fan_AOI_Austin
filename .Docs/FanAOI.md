@@ -1096,7 +1096,7 @@ Using predefined filters can be effective in tasks where domain knowledge is str
 </details>
 
 <details>
-  <summary>15. The Dense Layer</summary>
+  <summary>15. The Dense Layer*****</summary>
 
   In Convolutional Neural Networks (CNNs), a **dense layer** (or fully connected layer) is a type of layer where every neuron is connected to every other neuron in the previous layer. This is why it is also referred to as a **fully connected layer (FC layer)**. Here’s a detailed breakdown of what dense layers are, how they work, and their purpose in CNNs:
 
