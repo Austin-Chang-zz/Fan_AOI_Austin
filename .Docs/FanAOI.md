@@ -1625,3 +1625,32 @@ evaluation_accuracy = score[1]  # Assuming 'accuracy' is the second metric
 - If the validation generator during training and evaluation dataset in `model.evaluate()` are identical and augmentation is consistent, the scores should be close.
 - Differences indicate potential issues like overfitting or a mismatch in data distributions.
 </details>
+
+<details>
+  <summary>23. MaxPooling2D(2, 2)</summary>
+
+  The arguments `(2, 2)` in `MaxPooling2D(2, 2)` represent the **pool size** for the max pooling operation in a convolutional neural network (CNN). Here's what they mean:
+
+1. **(2, 2)**:
+   - The pooling window is 2x2, meaning it considers a 2x2 region of the input at a time.
+   - It slides over the input feature map with a stride (default) of 2 in both the horizontal and vertical directions, unless a different stride is explicitly specified.
+
+2. **Shrinking the Image**:
+   - Max pooling with a `(2, 2)` pool size reduces the spatial dimensions (height and width) of the image by a factor of 2.
+   - For example, if the input feature map has dimensions `(H, W)`, the output dimensions will be:
+     \[
+     \text{Output Height} = \frac{\text{Input Height}}{\text{Pool Size Height}}
+     \]
+     \[
+     \text{Output Width} = \frac{\text{Input Width}}{\text{Pool Size Width}}
+     \]
+   - Therefore, an input size of \( 32 \times 32 \) becomes \( 16 \times 16 \), \( 28 \times 28 \) becomes \( 14 \times 14 \), and so on.
+
+3. **Normalization**:
+   - Max pooling itself does **not require normalization** of its output because it is a purely spatial operation—it selects the maximum value in each pooling window.
+   - However, normalization may be required for the overall network performance, particularly in the input or after convolutional layers. Techniques like **batch normalization**, **L2 normalization**, or **input normalization (scaling pixel values to [0, 1])** are often applied to ensure stable and effective training.
+   
+4. **Summary**:
+   - The `(2, 2)` specifies the size of the window and stride, reducing the image size by a factor of 2 in height and width.
+   - Normalization of the pooled output isn't directly necessary due to max pooling but may still be applied elsewhere in the network depending on the design.
+</details>
